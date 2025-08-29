@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal & Policies</title>
+    <style>
+        :root {
+            --primary-radius: 16px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            background: rgba(0, 0, 0, 0.1);
+            min-height: 100vh;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            height: 680px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+            position: relative;
+        }
+
+        .close-button-top {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: #f8f9fa;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .close-button-top:hover {
+            background: #e9ecef;
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .close-button-top svg {
+            width: 16px;
+            height: 16px;
+            stroke: #6b7280;
+            transition: stroke 0.2s ease;
+        }
+
+        .close-button-top:hover svg {
+            stroke: #374151;
+        }
+
+        .sidebar {
+            width: 230px;
+            border-right: 1px solid #e0e0e0;
+            padding: 16px;
+            background: white;
+            border-radius: 12px 0 0 12px;
+            overflow-y: hidden;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 16px 20px;
+            background: white;
+            border-radius: 0 12px 12px 0;
+            overflow-y: hidden;
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 24px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 8px 32px 8px 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .search-box .close-button {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: none;
+            cursor: pointer;
+            color: #666;
+            padding: 4px;
+        }
+
+        .nav-section {
+            margin-bottom: 16px;
+        }
+
+        .nav-header {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            color: #333;
+            cursor: pointer;
+            border-radius: 6px;
+            margin-bottom: 4px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-header:hover {
+            background: #f5f5f7;
+        }
+
+        .nav-header.active {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .nav-header svg.icon {
+            margin-right: 12px;
+            width: 20px;
+            height: 20px;
+            stroke: #004aad;
+        }
+
+        .nav-header.active svg.icon {
+            stroke: white;
+        }
+
+        .nav-header.legal-disabled {
+            cursor: default !important;
+        }
+
+        .nav-header.legal-disabled:hover {
+            background: transparent !important;
+        }
+
+        .nav-header .arrow {
+            margin-left: auto;
+            transition: transform 0.2s;
+            width: 16px;
+            height: 16px;
+        }
+
+        .nav-header.active .arrow {
+            stroke: white;
+        }
+
+        .nav-section.expanded .arrow {
+            transform: rotate(90deg);
+        }
+
+        .nav-subitems {
+            display: none;
+            padding-left: 44px;
+        }
+
+        .nav-section.expanded .nav-subitems {
+            display: block;
+        }
+
+        .nav-subitem {
+            padding: 8px 12px;
+            color: #6b7280;
+            cursor: pointer;
+            border-radius: 6px;
+            margin-bottom: 2px;
+            font-size: 13px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-subitem:hover {
+            background: #f5f5f7;
+            color: #374151;
+        }
+
+        .main-search-box {
+            position: relative;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .main-search-box .search-container {
+            position: relative;
+            flex: 1;
+        }
+
+        .main-search-box input {
+            width: 100%;
+            padding: 10px 40px 10px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 20px;
+            font-size: 14px;
+            background: white;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .main-search-box input::placeholder {
+            color: #9ca3af;
+        }
+
+        .main-search-box .search-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            color: #9ca3af;
+        }
+
+        .main-search-box .close-icon {
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+            color: #6b7280;
+            transition: color 0.2s;
+        }
+
+        .main-search-box .close-icon:hover {
+            color: #374151;
+        }
+
+        .search-header-section {
+            background-color: #f9fafb;
+            padding: 24px 32px;
+            margin: -24px -24px 0 -24px;
+            margin-bottom: 0;
+        }
+
+        .all-documents {
+            font-family: __Roboto_ec6923, __Roboto_Fallback_ec6923;
+            font-size: 20px;
+            font-weight: 500;
+            color: #000;
+            margin-bottom: 0;
+            margin-top: 16px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            align-items: start;
+            justify-content: start;
+            margin: 0;
+            padding: 33px;
+            max-height: calc(100vh - 220px);
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .card-grid::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .card-grid::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .card-grid::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 10px;
+        }
+
+        .card-grid::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+
+        .Card_card__u6C24 {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 90%;
+            height: 240px;
+            padding: 20px;
+            margin: 0 auto;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            font-family: Roboto, sans-serif;
+            overflow: hidden;
+            transition: all 0.2s ease;
+            background: white;
+        }
+
+        .Card_card__u6C24:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-color: #d1d5db;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .tab-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 24px;
+        }
+
+        .card-icon {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #f0f4f9;
+            margin-bottom: 12px;
+        }
+
+        .Card_card__u6C24 .Card_name__SzixO {
+            font-family: var(--primary-font, var(--font-roboto), Arial, sans-serif);
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 500;
+            margin: 0 0 8px 0;
+        }
+
+        .Card_card__u6C24 .Card_description__rZUB_ {
+            margin-bottom: 16px;
+            padding-top: 8px;
+            font-family: var(--primary-font, var(--font-roboto), Arial, sans-serif);
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            color: #475467;
+            overflow: visible;
+            line-height: 1.3;
+            flex-grow: 1;
+        }
+
+        .learn-more {
+            color: #0066cc;
+            text-decoration: none;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            margin-top: auto;
+        }
+
+        .learn-more:hover {
+            text-decoration: underline;
+        }
+
+        .learn-more svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        /* From Uiverse.io by Shaidend */ 
+        .InputContainer {
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            background-color: rgb(255, 255, 255);
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            padding-left: 20px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.075);
+            margin-bottom: 24px;
+            width: fit-content;
+            margin-left: 0;
+        }
+
+        .input {
+            width: 200px;
+            height: 100%;
+            border: none;
+            outline: none;
+            font-size: 1em;
+            caret-color: rgb(255, 81, 0);
+        }
+
+        .labelforsearch {
+            cursor: text;
+            padding: 0px 15px;
+        }
+
+        .searchIcon {
+            width: 16px;
+        }
+
+        .searchIcon path {
+            fill: rgb(114, 114, 114);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="close-button-top" onclick="closeModal()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 6L6 18M6 6l12 12"/>
+            </svg>
+        </button>
+        <aside class="sidebar">
+            <div class="search-box">
+                <input type="search" placeholder="Search">
+                <button class="close-button">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-header legal-disabled">
+                    <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                    </svg>
+                    Legal
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-header">
+                    <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                    Terms
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-header">
+                    <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                    </svg>
+                    Privacy & Security
+                    <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </div>
+                <div class="nav-subitems">
+                    <div class="nav-subitem" data-content="liability-disclaimer">Liability Disclaimer Policy</div>
+                    <div class="nav-subitem" data-content="refund-policy-privacy">Return and Refund Policy</div>
+                    <div class="nav-subitem" data-content="disclaimer">Disclaimer</div>
+                    <div class="nav-subitem" data-content="cookie-policy">Cookie Policy</div>
+                    <div class="nav-subitem" data-content="privacy-notice">Privacy Notice</div>
+                    <div class="nav-subitem" data-content="privacy-guide">Privacy Guide for Accounts</div>
+                    <div class="nav-subitem" data-content="acceptable-use">Acceptable Use Policy</div>
+                    <div class="nav-subitem" data-content="security-compliance">Security and Compliance Overview</div>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-header">
+                    <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    Agreements
+                    <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </div>
+                <div class="nav-subitems">
+                    <div class="nav-subitem" data-content="service-agreement">Service Agreement</div>
+                    <div class="nav-subitem" data-content="affiliate-program">Affiliate Program Agreement</div>
+                    <div class="nav-subitem" data-content="partnership-agreement">Partnership Agreement</div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="search-header-section">
+                <div class="InputContainer">
+                    <input
+                        placeholder="Search"
+                        id="input-main"
+                        class="input"
+                        name="text"
+                        type="text"
+                    />
+                    <label class="labelforsearch" for="input-main">
+                        <svg class="searchIcon" viewBox="0 0 512 512">
+                            <path
+                                d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
+                            ></path>
+                        </svg>
+                    </label>
+                </div>
+                <div class="all-documents">All documents</div>
+            </div>
+            <div class="card-grid">
+                <!-- Terms Documents -->
+                <div class="Card_card__u6C24" data-category="terms" data-content="terms-of-service">
+                    <div class="card-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0066cc" stroke-width="2">
+                            <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="Card_name__SzixO">Terms of Service</h3>
+                    <p class="Card_description__rZUB_">Governs use of Pinnacle Ai's platforms and apps, including Lead Connector and Pinnacle Connect. Covers user responsibilities, subscriptions, payments, account restrictions, acceptable use, privacy, and dispute resolution.</p>
+                    <a href="#" class="learn-more">
+                        Learn more
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Privacy & Security Documents -->
+                <div class="Card_card__u6C24" data-category="privacy" data-content="liability-disclaimer">
+                    <div class="card-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0066cc" stroke-width="2">
+                            <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="Card_name__SzixO">Liability Disclaimer Policy</h3>
+                    <p class="Card_description__rZUB_">Establishes that account holders are solely responsible for compliance with federal, state, and international regulations.</p>
+                    <a href="#" class="learn-more">
+                        Learn more
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="Card_card__u6C24" data-category="privacy" data-content="refund-policy-privacy">
+                    <div class="card-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0066cc" stroke-width="2">
+                            <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="Card_name__SzixO">Return and Refund Policy</h3>
+                    <p class="Card_description__rZUB_">All sales with Pinnacle AI are final and non-refundable. No returns or refunds will be issued under any circumstances.</p>
+                    <a href="#" class="learn-more">
+                        Learn more
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="Card_card__u6C24" data-category="privacy" data-content="disclaimer">
+                    <div class="card-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0066cc" stroke-width="2">
+                            <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                        </svg>
+                    </div>
+                    <h3 class="Card_name__SzixO">Disclaimer</h3>
+                    <p class="Card_description__rZUB_">Website and app content are for informational purposes only and provided "as is" without guarantees of accuracy.</p>
+                    <a href="#" class="learn-more">
+                        Learn more
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="Card_card__u6C24" data-category="privacy" data-content="cookie-policy">
+                    <div class="card-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0066cc" stroke-width="2">
+                            <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="Card_name__SzixO">Cookie Policy</h3>
+                    <p class="Card_description__rZUB_">This Cookie Policy explains how we use cookies and similar technologies, including what types and why.</p>
+                    <a href="#" class="learn-more">
+                        Learn more
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="Card_card__u6C24" data-category="privacy" data-content="privacy-notice">
+                    <div class="card-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0066cc" stroke-width="2">
+                            <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="Card_name__SzixO">Privacy Notice</h3>
+                    <p class="Card_description__rZUB_">Outlines Pinnacle AI's practices for collecting, processing, retaining, and disclosing personal information.</p>
+                    <a href="#" class="learn-more">
+                        Learn more
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="Card_card__u6C24" data-category="privacy" data-content="privacy-guide">
+                    <div class="card-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0066cc" stroke-width="2">
+                            <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="Card_name__SzixO">Privacy Guide for Accounts</h3>
+                    <p class="Card_description__rZUB_">Understand your privacy compliance responsibilities when using Pinnacle AI. Learn your role as a data controller.</p>
+                    <a href="#" class="learn-more">
+                        Learn more
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="Card_card__u6C24" data-category="privacy" data-content="acceptable-use">
+                    <div class="card-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0066cc" stroke-width="2">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="Card_name__SzixO">Acceptable Use Policy</h3>
+                    <p class="Card_description__rZUB_">Outlines permitted and prohibited behaviors when using the services, including rules for AI usage and interactions.</p>
+                    <a href="#" class="learn-more">
+                        Learn more
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="Card_card__u6C24" data-category="privacy" data-content="security-compliance">
+                    <div class="card-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0066cc" stroke-width="2">
+                            <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="Card_name__SzixO">Security and Compliance Overview</h3>
+                    <p class="Card_description__rZUB_">Discover Pinnacle AI's robust security measures, including encryption, infrastructure safeguards, and compliance standards.</p>
+                    <a href="#" class="learn-more">
+                        Learn more
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Agreements Documents -->
+                <div class="Card_card__u6C24" data-category="agreements" data-content="service-agreement">
+                    <div class="card-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0066cc" stroke-width="2">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="Card_name__SzixO">Service Agreement</h3>
+                    <p class="Card_description__rZUB_">Master service agreement outlining the terms of service delivery and support.</p>
+                    <a href="#" class="learn-more">
+                        Learn more
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="Card_card__u6C24" data-category="agreements" data-content="affiliate-program">
+                    <div class="card-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0066cc" stroke-width="2">
+                            <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="Card_name__SzixO">Affiliate Program Agreement</h3>
+                    <p class="Card_description__rZUB_">Agreement outlining eligibility, compensation terms, code of conduct, intellectual property rights.</p>
+                    <a href="#" class="learn-more">
+                        Learn more
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="Card_card__u6C24" data-category="agreements" data-content="partnership-agreement">
+                    <div class="card-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0066cc" stroke-width="2">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="Card_name__SzixO">Partnership Agreement</h3>
+                    <p class="Card_description__rZUB_">Terms and conditions for business partnerships and collaborative arrangements.</p>
+                    <a href="#" class="learn-more">
+                        Learn more
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Expandable sidebar sections
+        document.querySelectorAll('.nav-header').forEach(header => {
+            // Skip click functionality for Legal button
+            if (header.textContent.trim() === 'Legal') {
+                return;
+            }
+            
+            header.addEventListener('click', () => {
+                const section = header.parentElement;
+                const isCurrentlyExpanded = section.classList.contains('expanded');
+                
+                // Remove active class from all headers and collapse all sections
+                document.querySelectorAll('.nav-header').forEach(h => h.classList.remove('active'));
+                document.querySelectorAll('.nav-section').forEach(s => s.classList.remove('expanded'));
+                
+                // If section wasn't expanded, expand it and make header active
+                if (!isCurrentlyExpanded) {
+                    section.classList.add('expanded');
+                    header.classList.add('active');
+                    
+                    // Filter cards based on section
+                    const sectionCategory = getSectionCategory(header);
+                    filterCardsByCategory(sectionCategory);
+                } else {
+                    // If it was expanded and clicked again, show all cards
+                    showAllCards();
+                }
+            });
+        });
+
+        // Subitem clicks
+        document.querySelectorAll('.nav-subitem').forEach(subitem => {
+            subitem.addEventListener('click', (e) => {
+                e.stopPropagation();
+                
+                // Remove active class from all subitems
+                document.querySelectorAll('.nav-subitem').forEach(s => s.classList.remove('active'));
+                // Add active class to clicked subitem
+                subitem.classList.add('active');
+                
+                // Filter to show only the specific document
+                const contentId = subitem.getAttribute('data-content');
+                filterCardsByContent(contentId);
+            });
+        });
+
+        function getSectionCategory(header) {
+            const text = header.textContent.trim();
+            switch(text) {
+                case 'Legal': return 'legal';
+                case 'Terms': return 'terms';
+                case 'Privacy & Security': return 'privacy';
+                case 'Agreements': return 'agreements';
+                default: return '';
+            }
+        }
+
+        function filterCardsByCategory(category) {
+            const cards = document.querySelectorAll('.Card_card__u6C24');
+            cards.forEach(card => {
+                if (card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function filterCardsByContent(contentId) {
+            const cards = document.querySelectorAll('.Card_card__u6C24');
+            cards.forEach(card => {
+                if (card.getAttribute('data-content') === contentId) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function showAllCards() {
+            const cards = document.querySelectorAll('.Card_card__u6C24');
+            cards.forEach(card => {
+                card.style.display = 'flex';
+            });
+        }
+
+        // Close button functionality
+        document.querySelector('.close-button').addEventListener('click', () => {
+            const searchInput = document.querySelector('.search-box input');
+            searchInput.value = '';
+            showAllCards();
+        });
+
+        // Search functionality
+        document.querySelector('.search-box input').addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            if (searchTerm) {
+                // Clear sidebar selections during search
+                document.querySelectorAll('.nav-header').forEach(h => h.classList.remove('active'));
+                document.querySelectorAll('.nav-section').forEach(s => s.classList.remove('expanded'));
+                document.querySelectorAll('.nav-subitem').forEach(s => s.classList.remove('active'));
+                
+                const cards = document.querySelectorAll('.Card_card__u6C24');
+                cards.forEach(card => {
+                    const title = card.querySelector('.card-title').textContent.toLowerCase();
+                    const description = card.querySelector('.card-description').textContent.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            } else {
+                showAllCards();
+            }
+        });
+
+        // Close modal function
+        function closeModal() {
+            // Hide the entire container with a fade-out effect
+            const container = document.querySelector('.container');
+            container.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            container.style.opacity = '0';
+            container.style.transform = 'scale(0.95)';
+            
+            // After animation, hide completely or redirect
+            setTimeout(() => {
+                container.style.display = 'none';
+                // Or you could redirect: window.close(); or window.location.href = 'about:blank';
+            }, 300);
+        }
+    </script>
+</body>
+</html> backup
