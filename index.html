@@ -1020,6 +1020,19 @@
             }, 300);
         }
     </script>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+  const closeBtn = document.querySelector('.close-button-top');
+  if(closeBtn){
+    closeBtn.addEventListener('click', () => {
+      // Send message to parent page to close overlay
+      window.parent.postMessage('closeOverlay', '*');
+    });
+  }
+});
+</script>
+
 </body>
 
 </html> 
+
